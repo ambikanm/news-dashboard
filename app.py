@@ -379,18 +379,33 @@ div[data-testid="stTextInput"] input  { background: #f5f5f5 !important; border: 
 .no-results { text-align: center; padding: 80px 20px; color: #bbbbbb; font-size: 14px; }
 .no-results-icon { font-size: 48px; display: block; margin-bottom: 12px; opacity: 0.4; }
 
-/* ── Primary button (Refresh Now) ── */
-button[data-testid="baseButton-primary"],
-button[data-testid="stBaseButton-primary"] {
-    background: #1a1a1a !important;
-    border-color: #1a1a1a !important;
-    color: #ffffff !important;
+/* ── Checkbox / label legibility (mobile-safe) ── */
+.stCheckbox label,
+.stCheckbox label p,
+.stCheckbox span,
+[data-testid="stCheckbox"] label,
+[data-testid="stCheckbox"] label p,
+[data-testid="stCheckbox"] span {
+    color: #1a1a1a !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
 }
-button[data-testid="baseButton-primary"]:hover,
-button[data-testid="stBaseButton-primary"]:hover {
-    background: #333333 !important;
-    border-color: #333333 !important;
-    color: #ffffff !important;
+.stMultiSelect label,
+.stSelectbox label,
+[data-testid="stWidgetLabel"] p {
+    color: #1a1a1a !important;
+    font-size: 14px !important;
+}
+.streamlit-expanderHeader,
+.streamlit-expanderHeader p {
+    color: #1a1a1a !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+.streamlit-expanderContent label,
+.streamlit-expanderContent p,
+.streamlit-expanderContent span {
+    color: #1a1a1a !important;
 }
 
 /* Scrollbar */
@@ -570,7 +585,7 @@ def render_sidebar(status: dict):
 
         st.markdown("<div class='sidebar-section-header'>Refresh</div>", unsafe_allow_html=True)
         st.toggle("Auto-refresh (5 min)", value=True, key="auto_refresh_toggle")
-        if st.button("🔄 Refresh Now", key="sb_refresh", type="primary", use_container_width=True):
+        if st.button("🔄 Refresh Now", key="sb_refresh", type="secondary", use_container_width=True):
             st.cache_data.clear()
             st.rerun()
 
@@ -600,7 +615,7 @@ def render_mobile_expander(status: dict):
     label = "🔍 Filter & Search" + (f"  ·  {', '.join(active)}" if active else "")
 
     with st.expander(label, expanded=False):
-        if st.button("🔄 Refresh Now", key="exp_refresh", type="primary"):
+        if st.button("🔄 Refresh Now", key="exp_refresh", type="secondary"):
             st.cache_data.clear()
             st.rerun()
         col1, col2 = st.columns(2)
@@ -647,9 +662,9 @@ def card_html(article: dict) -> str:
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    # Capture render time first — before any cached calls — so it always
-    # reflects the true current page load, not when the cache was populated.
-    last_refreshed = datetime.now().strftime("%H:%M:%S")
+    # Set at the very top, before inject_css / cache calls, so it always
+    # reflects the true current render time, never the cache population time.
+    page_rendered_at = datetime.now().strftime("%H:%M:%S")
 
     inject_css()
     _init_state()
@@ -672,7 +687,7 @@ def main():
     </div>
     <div style="text-align:right">
       {CLOCK_DIV}
-      <div style="font-size:11px;color:#aaaaaa;margin-top:4px">Last updated {last_refreshed}</div>
+      <div style="font-size:11px;color:#aaaaaa;margin-top:4px">Last updated {page_rendered_at}</div>
     </div>
   </div>
 </div>
@@ -722,7 +737,7 @@ def main():
 """, unsafe_allow_html=True)
     with btn_col:
         st.markdown("<div style='padding-top:14px'>", unsafe_allow_html=True)
-        if st.button("🔄 Refresh Now", key="main_refresh", type="primary", use_container_width=True):
+        if st.button("🔄 Refresh Now", key="main_refresh", type="secondary", use_container_width=True):
             st.cache_data.clear()
             st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
