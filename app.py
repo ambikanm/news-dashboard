@@ -379,6 +379,20 @@ div[data-testid="stTextInput"] input  { background: #f5f5f5 !important; border: 
 .no-results { text-align: center; padding: 80px 20px; color: #bbbbbb; font-size: 14px; }
 .no-results-icon { font-size: 48px; display: block; margin-bottom: 12px; opacity: 0.4; }
 
+/* ── Primary button (Refresh Now) ── */
+button[data-testid="baseButton-primary"],
+button[data-testid="stBaseButton-primary"] {
+    background: #1a1a1a !important;
+    border-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+button[data-testid="baseButton-primary"]:hover,
+button[data-testid="stBaseButton-primary"]:hover {
+    background: #333333 !important;
+    border-color: #333333 !important;
+    color: #ffffff !important;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #f5f5f5; }
@@ -549,14 +563,14 @@ def render_sidebar(status: dict):
             unsafe_allow_html=True,
         )
         st.markdown(
-            "<div style='font-size:10px;color:#aaaaaa;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px'>Your world. One feed.</div>",
+            "<div style='font-size:10px;color:#aaaaaa;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px'>The more you do, the more you can do.</div>",
             unsafe_allow_html=True,
         )
         st.markdown("<hr style='border-color:#e8e8e8;margin:4px 0 0 0'>", unsafe_allow_html=True)
 
         st.markdown("<div class='sidebar-section-header'>Refresh</div>", unsafe_allow_html=True)
         st.toggle("Auto-refresh (5 min)", value=True, key="auto_refresh_toggle")
-        if st.button("⟳  Refresh Now", use_container_width=True):
+        if st.button("🔄 Refresh Now", key="sb_refresh", type="primary", use_container_width=True):
             st.cache_data.clear()
             st.rerun()
 
@@ -586,6 +600,9 @@ def render_mobile_expander(status: dict):
     label = "🔍 Filter & Search" + (f"  ·  {', '.join(active)}" if active else "")
 
     with st.expander(label, expanded=False):
+        if st.button("🔄 Refresh Now", key="exp_refresh", type="primary"):
+            st.cache_data.clear()
+            st.rerun()
         col1, col2 = st.columns(2)
         with col1:
             st.markdown("<div class='sidebar-section-header' style='margin-top:4px'>Sources</div>",
@@ -630,25 +647,28 @@ def card_html(article: dict) -> str:
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
+    # Capture render time first — before any cached calls — so it always
+    # reflects the true current page load, not when the cache was populated.
+    last_refreshed = datetime.now().strftime("%H:%M:%S")
+
     inject_css()
     _init_state()
 
     if AUTOREFRESH_AVAILABLE and st.session_state.get("auto_refresh_toggle", True):
         st_autorefresh(interval=300_000, key="autorefresh_counter")
 
-    with st.spinner("Fetching headlines…"):
+    with st.spinner("Fetching latest headlines…"):
         articles, status = fetch_all_feeds()
 
     render_sidebar(status)
 
     # ── Header ──
-    last_refreshed = datetime.now().strftime("%H:%M:%S")
     st.markdown(f"""
 <div class="morning-header">
   <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px">
     <div>
       <div class="morning-title">The Nilesh Times</div>
-      <div class="morning-subtitle">Your world. One feed.</div>
+      <div class="morning-subtitle">The more you do, the more you can do.</div>
     </div>
     <div style="text-align:right">
       {CLOCK_DIV}
@@ -688,7 +708,9 @@ def main():
         f"<span class='stats-sep'>·</span><span style='color:#999'>&ldquo;{search}&rdquo;</span>"
         if search else ""
     )
-    st.markdown(f"""
+    stats_col, btn_col = st.columns([6, 1])
+    with stats_col:
+        st.markdown(f"""
 <div class="stats-bar">
   <span class="stats-count">{total:,}</span>
   <span>headline{'s' if total != 1 else ''}</span>
@@ -698,6 +720,12 @@ def main():
   {filter_tag}{search_tag}
 </div>
 """, unsafe_allow_html=True)
+    with btn_col:
+        st.markdown("<div style='padding-top:14px'>", unsafe_allow_html=True)
+        if st.button("🔄 Refresh Now", key="main_refresh", type="primary", use_container_width=True):
+            st.cache_data.clear()
+            st.rerun()
+        st.markdown("</div>", unsafe_allow_html=True)
 
     # ── Card grid ──
     if not filtered:
