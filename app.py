@@ -664,7 +664,7 @@ def card_html(article: dict) -> str:
 def main():
     # Set at the very top, before inject_css / cache calls, so it always
     # reflects the true current render time, never the cache population time.
-    page_rendered_at = datetime.now().strftime("%H:%M:%S")
+    page_rendered_at = datetime.utcnow().strftime("%H:%M:%S") + " UTC"
 
     inject_css()
     _init_state()
