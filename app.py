@@ -22,26 +22,30 @@ st.set_page_config(
 )
 
 # ── Source definitions ─────────────────────────────────────────────────────────
+# Reuters, AP, CityAM, Gulf News, Khaleej Times, Telegraph moved to Google News
+# RSS (direct feeds returned 403/404/timeout). The Times, Bloomberg were already
+# on Google News. Economist moved to the section-level feed (403 on top-level).
 SOURCES = [
-    {"name": "BBC News",        "url": "http://feeds.bbci.co.uk/news/rss.xml",                                               "colour": "#BB1919", "domain": "bbc.co.uk",         "text": "#fff"},
-    {"name": "Reuters",         "url": "https://feeds.reuters.com/reuters/topNews",                                          "colour": "#FF8000", "domain": "reuters.com",        "text": "#fff"},
-    {"name": "Sky News",        "url": "https://feeds.skynews.com/feeds/rss/home.xml",                                       "colour": "#003082", "domain": "skynews.com",        "text": "#fff"},
-    {"name": "CNBC",            "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",                              "colour": "#0070C8", "domain": "cnbc.com",           "text": "#fff"},
-    {"name": "AP News",         "url": "https://feeds.apnews.com/rss/apf-topnews",                                          "colour": "#333333", "domain": "apnews.com",         "text": "#fff"},
-    {"name": "CityAM",          "url": "https://www.cityam.com/feed/",                                                      "colour": "#2E7D32", "domain": "cityam.com",         "text": "#fff"},
-    {"name": "Gulf News",       "url": "https://gulfnews.com/rss",                                                          "colour": "#00796B", "domain": "gulfnews.com",       "text": "#fff"},
-    {"name": "Khaleej Times",   "url": "https://www.khaleejtimes.com/rss",                                                  "colour": "#6A1B9A", "domain": "khaleejtimes.com",   "text": "#fff"},
-    {"name": "NDTV",            "url": "https://feeds.feedburner.com/ndtvnews-top-stories",                                  "colour": "#8B0000", "domain": "ndtv.com",           "text": "#fff"},
-    {"name": "CNN",             "url": "http://rss.cnn.com/rss/edition.rss",                                                "colour": "#CC0000", "domain": "cnn.com",            "text": "#fff"},
-    {"name": "Forbes",          "url": "https://www.forbes.com/feeds/forbesmagazine/index.rss",                             "colour": "#1B5E20", "domain": "forbes.com",         "text": "#fff"},
-    {"name": "Financial Times", "url": "https://www.ft.com/rss/home",                                                       "colour": "#D6580A", "domain": "ft.com",             "text": "#fff"},
-    {"name": "Telegraph",       "url": "https://www.telegraph.co.uk/rss.xml",                                               "colour": "#1C3F6E", "domain": "telegraph.co.uk",    "text": "#fff"},
-    {"name": "The Times",       "url": "https://news.google.com/rss/search?q=the+times+uk+news&hl=en-GB&gl=GB&ceid=GB:en", "colour": "#C41E3A", "domain": "thetimes.co.uk",     "text": "#fff"},
-    {"name": "Bloomberg",       "url": "https://news.google.com/rss/search?q=bloomberg+finance&hl=en-GB&gl=GB&ceid=GB:en", "colour": "#444444", "domain": "bloomberg.com",      "text": "#fff"},
-    {"name": "The Economist",   "url": "https://www.economist.com/rss/the-economist-today.rss",                             "colour": "#E3120B", "domain": "economist.com",      "text": "#fff"},
+    {"name": "BBC News",        "url": "http://feeds.bbci.co.uk/news/rss.xml",                                                          "colour": "#BB1919", "domain": "bbc.co.uk",         "text": "#fff"},
+    {"name": "Reuters",         "url": "https://news.google.com/rss/search?q=reuters+news&hl=en-GB&gl=GB&ceid=GB:en",                   "colour": "#FF8000", "domain": "reuters.com",        "text": "#fff"},
+    {"name": "Sky News",        "url": "https://feeds.skynews.com/feeds/rss/home.xml",                                                  "colour": "#003082", "domain": "skynews.com",        "text": "#fff"},
+    {"name": "CNBC",            "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",                                         "colour": "#0070C8", "domain": "cnbc.com",           "text": "#fff"},
+    {"name": "AP News",         "url": "https://news.google.com/rss/search?q=AP+associated+press+news&hl=en-GB&gl=GB&ceid=GB:en",      "colour": "#333333", "domain": "apnews.com",         "text": "#fff"},
+    {"name": "CityAM",          "url": "https://news.google.com/rss/search?q=cityam+city+am&hl=en-GB&gl=GB&ceid=GB:en",                "colour": "#2E7D32", "domain": "cityam.com",         "text": "#fff"},
+    {"name": "Gulf News",       "url": "https://news.google.com/rss/search?q=gulf+news+uae&hl=en-GB&gl=GB&ceid=GB:en",                 "colour": "#00796B", "domain": "gulfnews.com",       "text": "#fff"},
+    {"name": "Khaleej Times",   "url": "https://news.google.com/rss/search?q=khaleej+times+UAE&hl=en-GB&gl=GB&ceid=GB:en",             "colour": "#6A1B9A", "domain": "khaleejtimes.com",   "text": "#fff"},
+    {"name": "NDTV",            "url": "https://feeds.feedburner.com/ndtvnews-top-stories",                                             "colour": "#8B0000", "domain": "ndtv.com",           "text": "#fff"},
+    {"name": "CNN",             "url": "http://rss.cnn.com/rss/edition.rss",                                                           "colour": "#CC0000", "domain": "cnn.com",            "text": "#fff"},
+    {"name": "Forbes",          "url": "https://www.forbes.com/innovation/feed/",                                                       "colour": "#1B5E20", "domain": "forbes.com",         "text": "#fff"},
+    {"name": "Financial Times", "url": "https://www.ft.com/rss/home",                                                                  "colour": "#D6580A", "domain": "ft.com",             "text": "#fff"},
+    {"name": "Telegraph",       "url": "https://news.google.com/rss/search?q=daily+telegraph+UK+news&hl=en-GB&gl=GB&ceid=GB:en",       "colour": "#1C3F6E", "domain": "telegraph.co.uk",    "text": "#fff"},
+    {"name": "The Times",       "url": "https://news.google.com/rss/search?q=the+times+uk+news&hl=en-GB&gl=GB&ceid=GB:en",            "colour": "#C41E3A", "domain": "thetimes.co.uk",     "text": "#fff"},
+    {"name": "Bloomberg",       "url": "https://news.google.com/rss/search?q=bloomberg+finance&hl=en-GB&gl=GB&ceid=GB:en",            "colour": "#444444", "domain": "bloomberg.com",      "text": "#fff"},
+    {"name": "The Economist",   "url": "https://www.economist.com/finance-and-economics/rss.xml",                                      "colour": "#E3120B", "domain": "economist.com",      "text": "#fff"},
 ]
 
-SOURCE_MAP = {s["name"]: s for s in SOURCES}
+ALL_SOURCE_NAMES = [s["name"] for s in SOURCES]
+CATEGORIES = ["All Topics", "World News", "Business / Finance", "Technology", "Politics"]
 
 CATEGORY_KEYWORDS = {
     "Business / Finance": [
@@ -64,7 +68,86 @@ CATEGORY_KEYWORDS = {
     ],
 }
 
+BROWSER_UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/120.0.0.0 Safari/537.36"
+)
+FETCH_HEADERS = {"User-Agent": BROWSER_UA}
+
+
+# ── Session state ──────────────────────────────────────────────────────────────
+
+def _init_state():
+    if "sources_selected" not in st.session_state:
+        st.session_state.sources_selected = set(ALL_SOURCE_NAMES)
+    if "filter_category" not in st.session_state:
+        st.session_state.filter_category = "All Topics"
+    if "filter_search" not in st.session_state:
+        st.session_state.filter_search = ""
+    for name in ALL_SOURCE_NAMES:
+        if f"sb_ck_{name}" not in st.session_state:
+            st.session_state[f"sb_ck_{name}"] = True
+        if f"exp_ck_{name}" not in st.session_state:
+            st.session_state[f"exp_ck_{name}"] = True
+    for key, default in [
+        ("sb_cat", "All Topics"), ("exp_cat", "All Topics"),
+        ("sb_search", ""),        ("exp_search", ""),
+    ]:
+        if key not in st.session_state:
+            st.session_state[key] = default
+
+
+def _select_all():
+    st.session_state.sources_selected = set(ALL_SOURCE_NAMES)
+    for name in ALL_SOURCE_NAMES:
+        st.session_state[f"sb_ck_{name}"]  = True
+        st.session_state[f"exp_ck_{name}"] = True
+
+
+def _deselect_all():
+    st.session_state.sources_selected = set()
+    for name in ALL_SOURCE_NAMES:
+        st.session_state[f"sb_ck_{name}"]  = False
+        st.session_state[f"exp_ck_{name}"] = False
+
+
+def _on_sb_source(name):
+    val = st.session_state[f"sb_ck_{name}"]
+    if val: st.session_state.sources_selected.add(name)
+    else:   st.session_state.sources_selected.discard(name)
+    st.session_state[f"exp_ck_{name}"] = val
+
+
+def _on_exp_source(name):
+    val = st.session_state[f"exp_ck_{name}"]
+    if val: st.session_state.sources_selected.add(name)
+    else:   st.session_state.sources_selected.discard(name)
+    st.session_state[f"sb_ck_{name}"] = val
+
+
+def _on_sb_cat():
+    st.session_state.filter_category = st.session_state.sb_cat
+    st.session_state.exp_cat = st.session_state.sb_cat
+
+
+def _on_exp_cat():
+    st.session_state.filter_category = st.session_state.exp_cat
+    st.session_state.sb_cat = st.session_state.exp_cat
+
+
+def _on_sb_search():
+    st.session_state.filter_search = st.session_state.sb_search
+    st.session_state.exp_search = st.session_state.sb_search
+
+
+def _on_exp_search():
+    st.session_state.filter_search = st.session_state.exp_search
+    st.session_state.sb_search = st.session_state.exp_search
+
+
 # ── CSS injection ──────────────────────────────────────────────────────────────
+
 def inject_css():
     st.markdown("""
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,12 +155,11 @@ def inject_css():
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* ── Reset & base ── */
 html, body, [class*="css"] {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
-/* Grain texture overlay */
+/* Grain texture */
 body::before {
     content: '';
     position: fixed;
@@ -91,7 +173,6 @@ body::before {
     background-size: 200px 200px;
 }
 
-/* ── Page background ── */
 .stApp {
     background-color: #ffffff !important;
     color: #1a1a1a !important;
@@ -107,8 +188,6 @@ body::before {
 [data-testid="stSidebar"] span {
     color: #555555 !important;
 }
-
-/* Sidebar section headers */
 .sidebar-section-header {
     font-size: 10px;
     font-weight: 700;
@@ -120,7 +199,7 @@ body::before {
     border-bottom: 1px solid #e8e8e8;
 }
 
-/* ── Source dots ── */
+/* ── Status dots ── */
 .source-item {
     display: flex;
     align-items: center;
@@ -128,16 +207,11 @@ body::before {
     padding: 2px 0;
     font-size: 13px;
 }
-.dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-.dot-live  { background: #22c55e; box-shadow: 0 0 4px #22c55e88; }
-.dot-fail  { background: #ef4444; box-shadow: 0 0 4px #ef444488; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.dot-live { background: #22c55e; box-shadow: 0 0 4px #22c55e88; }
+.dot-fail { background: #ef4444; box-shadow: 0 0 4px #ef444488; }
 
-/* ── Header bar ── */
+/* ── Header ── */
 .morning-header {
     background: #ffffff;
     border-bottom: 1px solid #e8e8e8;
@@ -176,6 +250,19 @@ body::before {
     letter-spacing: 1px;
 }
 
+/* ── Mobile filter expander ── */
+[data-testid="stExpander"] {
+    border: 1px solid #e8e8e8 !important;
+    border-radius: 8px !important;
+    background: #fafafa !important;
+}
+[data-testid="stExpander"] summary,
+[data-testid="stExpander"] summary p {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #555555 !important;
+}
+
 /* ── Stats bar ── */
 .stats-bar {
     display: flex;
@@ -186,27 +273,20 @@ body::before {
     color: #aaaaaa;
     border-bottom: 1px solid #e8e8e8;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
-.stats-count {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1a1a1a;
-}
-.stats-sep { color: #cccccc; }
+.stats-count { font-size: 20px; font-weight: 700; color: #1a1a1a; }
+.stats-sep   { color: #cccccc; }
 
-/* ── Card grid ── */
+/* ── Card grid — responsive ── */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     padding-bottom: 60px;
 }
-@media (max-width: 1100px) {
-    .card-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 700px) {
-    .card-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 1100px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 660px)  { .card-grid { grid-template-columns: 1fr; } }
 
 /* ── Article card ── */
 .news-card {
@@ -214,11 +294,11 @@ body::before {
     border-radius: 10px;
     border: 1px solid #e8e8e8;
     border-left-width: 3px;
-    padding: 16px 18px 14px 18px;
+    padding: 18px 20px 16px 20px;
     transition: background 0.18s, box-shadow 0.18s;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 9px;
     position: relative;
     overflow: hidden;
 }
@@ -226,7 +306,6 @@ body::before {
     background: #fafafa;
     box-shadow: 0 2px 14px rgba(0,0,0,0.07);
 }
-
 .card-header {
     display: flex;
     align-items: center;
@@ -250,7 +329,7 @@ body::before {
     margin-left: auto;
 }
 .card-title {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     line-height: 1.4;
     color: #1a1a1a;
@@ -259,14 +338,11 @@ body::before {
     color: #1a1a1a !important;
     text-decoration: none !important;
 }
-.card-title a:hover {
-    color: #000000 !important;
-    text-decoration: underline !important;
-}
+.card-title a:hover { color: #000 !important; text-decoration: underline !important; }
 .card-desc {
-    font-size: 12px;
+    font-size: 13px;
     color: #888888;
-    line-height: 1.5;
+    line-height: 1.55;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -274,32 +350,16 @@ body::before {
     flex: 1;
 }
 .card-footer {
-    font-size: 11px;
+    font-size: 12px;
     color: #bbbbbb;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
-/* ── Streamlit widget overrides ── */
-[data-testid="stCheckbox"] label span {
-    font-size: 13px !important;
-    color: #555555 !important;
-}
-.stSelectbox label, .stTextInput label {
-    color: #888888 !important;
-    font-size: 12px !important;
-}
-div[data-testid="stSelectbox"] > div {
-    background: #f5f5f5 !important;
-    border: 1px solid #e0e0e0 !important;
-    border-radius: 6px !important;
-}
-div[data-testid="stTextInput"] input {
-    background: #f5f5f5 !important;
-    border: 1px solid #e0e0e0 !important;
-    border-radius: 6px !important;
-    color: #1a1a1a !important;
-    font-size: 13px !important;
-}
+/* ── Widget overrides ── */
+[data-testid="stCheckbox"] label span { font-size: 13px !important; color: #555555 !important; }
+.stSelectbox label, .stTextInput label { color: #888888 !important; font-size: 12px !important; }
+div[data-testid="stSelectbox"] > div  { background: #f5f5f5 !important; border: 1px solid #e0e0e0 !important; border-radius: 6px !important; }
+div[data-testid="stTextInput"] input  { background: #f5f5f5 !important; border: 1px solid #e0e0e0 !important; border-radius: 6px !important; color: #1a1a1a !important; font-size: 13px !important; }
 .stButton button {
     background: #f5f5f5 !important;
     border: 1px solid #e0e0e0 !important;
@@ -311,42 +371,13 @@ div[data-testid="stTextInput"] input {
     padding: 6px 16px !important;
     transition: background 0.15s, border-color 0.15s !important;
 }
-.stButton button:hover {
-    background: #ebebeb !important;
-    border-color: #cccccc !important;
-    color: #333333 !important;
-}
-
-/* Hide Streamlit branding */
+.stButton button:hover { background: #ebebeb !important; border-color: #cccccc !important; color: #333333 !important; }
+[data-testid="stToggle"] label { color: #555555 !important; font-size: 13px !important; }
 #MainMenu, footer, header { visibility: hidden; }
 
-/* ── Toggle ── */
-[data-testid="stToggle"] label {
-    color: #555555 !important;
-    font-size: 13px !important;
-}
-
 /* ── No results ── */
-.no-results {
-    text-align: center;
-    padding: 80px 20px;
-    color: #bbbbbb;
-    font-size: 14px;
-}
-.no-results-icon {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 12px;
-    opacity: 0.4;
-}
-
-/* ── Countdown ── */
-.countdown-text {
-    font-size: 11px;
-    color: #aaaaaa;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.5px;
-}
+.no-results { text-align: center; padding: 80px 20px; color: #bbbbbb; font-size: 14px; }
+.no-results-icon { font-size: 48px; display: block; margin-bottom: 12px; opacity: 0.4; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -356,8 +387,7 @@ div[data-testid="stTextInput"] input {
 </style>
 """, unsafe_allow_html=True)
 
-    # Clock script injected via components.html (st.markdown strips <script> tags).
-    # Uses window.parent.document to reach the parent frame's DOM element.
+    # Clock tick script — components.html is used because st.markdown strips <script> tags.
     components.html("""
 <script>
 (function tick() {
@@ -416,7 +446,7 @@ def time_ago(dt: datetime | None) -> str:
     return f"{d} day{'s' if d != 1 else ''} ago"
 
 
-def truncate(text: str, chars: int = 180) -> str:
+def truncate(text: str, chars: int = 200) -> str:
     if not text:
         return ""
     text = re.sub(r"<[^>]+>", "", text).strip()
@@ -434,8 +464,7 @@ def infer_category(title: str, desc: str) -> str:
 def fetch_feed(source: dict) -> tuple[str, list[dict], bool]:
     name = source["name"]
     try:
-        headers = {"User-Agent": "Mozilla/5.0 (compatible; MorningBrief/1.0; +https://github.com/morning-brief)"}
-        resp = requests.get(source["url"], headers=headers, timeout=10)
+        resp = requests.get(source["url"], headers=FETCH_HEADERS, timeout=15)
         resp.raise_for_status()
         feed = feedparser.parse(resp.content)
         articles = []
@@ -443,15 +472,14 @@ def fetch_feed(source: dict) -> tuple[str, list[dict], bool]:
             title = getattr(entry, "title", "").strip()
             if not title:
                 continue
-            link  = getattr(entry, "link",    "") or ""
-            desc  = getattr(entry, "summary", "") or getattr(entry, "description", "") or ""
-            dt    = parse_datetime(entry)
+            link = getattr(entry, "link", "") or ""
+            desc = getattr(entry, "summary", "") or getattr(entry, "description", "") or ""
             articles.append({
                 "source":             name,
                 "title":              title,
                 "url":                link,
-                "description":        truncate(desc, 200),
-                "published_datetime": dt,
+                "description":        truncate(desc),
+                "published_datetime": parse_datetime(entry),
                 "favicon_url":        f"https://www.google.com/s2/favicons?domain={source['domain']}&sz=32",
                 "colour":             source["colour"],
                 "text_colour":        source["text"],
@@ -465,7 +493,8 @@ def fetch_feed(source: dict) -> tuple[str, list[dict], bool]:
 def fetch_all_feeds() -> tuple[list[dict], dict[str, bool]]:
     all_articles: list[dict] = []
     status: dict[str, bool] = {}
-    with ThreadPoolExecutor(max_workers=16) as ex:
+    # Cap at 8 workers — bursting 16 concurrent Google News requests triggers throttling
+    with ThreadPoolExecutor(max_workers=8) as ex:
         futures = {ex.submit(fetch_feed, s): s for s in SOURCES}
         for future in as_completed(futures):
             name, articles, ok = future.result()
@@ -478,10 +507,8 @@ def fetch_all_feeds() -> tuple[list[dict], dict[str, bool]]:
     return all_articles, status
 
 
-# ── Static HTML fragments ─────────────────────────────────────────────────────
+# ── Static fragments ───────────────────────────────────────────────────────────
 
-# Pure div — no <script> tag (scripts are stripped by st.markdown).
-# The clock JS is injected separately via components.html in inject_css().
 CLOCK_DIV = '<div id="mb-clock" class="header-clock">--:--:--</div>'
 
 NEWSPAPER_SVG = """
@@ -493,9 +520,28 @@ NEWSPAPER_SVG = """
 """
 
 
+# ── Shared filter widget renderers ────────────────────────────────────────────
+
+def _render_source_controls(prefix: str, status: dict):
+    """Select All / Deselect All buttons + checkboxes for a given key prefix."""
+    c1, c2 = st.columns(2)
+    c1.button("✅ Select All",   key=f"{prefix}_btn_all",  on_click=_select_all,   use_container_width=True)
+    c2.button("❌ Deselect All", key=f"{prefix}_btn_none", on_click=_deselect_all, use_container_width=True)
+    on_change = _on_sb_source if prefix == "sb" else _on_exp_source
+    for src in SOURCES:
+        name = src["name"]
+        dot_cls = "dot-live" if status.get(name, False) else "dot-fail"
+        st.checkbox(name, key=f"{prefix}_ck_{name}", on_change=on_change, args=(name,))
+        st.markdown(
+            f"<div class='source-item' style='margin-top:-28px;pointer-events:none'>"
+            f"<span class='dot {dot_cls}'></span></div>",
+            unsafe_allow_html=True,
+        )
+
+
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 
-def render_sidebar(status: dict[str, bool]) -> tuple[list[str], str, str, bool]:
+def render_sidebar(status: dict):
     with st.sidebar:
         st.markdown(NEWSPAPER_SVG, unsafe_allow_html=True)
         st.markdown(
@@ -508,54 +554,64 @@ def render_sidebar(status: dict[str, bool]) -> tuple[list[str], str, str, bool]:
         )
         st.markdown("<hr style='border-color:#e8e8e8;margin:4px 0 0 0'>", unsafe_allow_html=True)
 
-        # ── Refresh ──
         st.markdown("<div class='sidebar-section-header'>Refresh</div>", unsafe_allow_html=True)
-        auto_refresh = st.toggle("Auto-refresh (5 min)", value=True)
+        st.toggle("Auto-refresh (5 min)", value=True, key="auto_refresh_toggle")
         if st.button("⟳  Refresh Now", use_container_width=True):
             st.cache_data.clear()
             st.rerun()
 
-        # ── Sources ──
         st.markdown("<div class='sidebar-section-header'>Sources</div>", unsafe_allow_html=True)
-        selected_sources: list[str] = []
-        for src in SOURCES:
-            dot_cls = "dot-live" if status.get(src["name"], False) else "dot-fail"
-            checked = st.checkbox(src["name"], value=True, key=f"src_{src['name']}")
-            if checked:
-                selected_sources.append(src["name"])
-            st.markdown(
-                f"<div class='source-item' style='margin-top:-28px;pointer-events:none'>"
-                f"<span class='dot {dot_cls}'></span></div>",
-                unsafe_allow_html=True,
-            )
+        _render_source_controls("sb", status)
 
-        # ── Category ──
         st.markdown("<div class='sidebar-section-header'>Category</div>", unsafe_allow_html=True)
-        category = st.selectbox(
-            "Topic",
-            ["All Topics", "World News", "Business / Finance", "Technology", "Politics"],
-            label_visibility="collapsed",
-        )
+        st.selectbox("Category", CATEGORIES, key="sb_cat",
+                     label_visibility="collapsed", on_change=_on_sb_cat)
 
-        # ── Search ──
         st.markdown("<div class='sidebar-section-header'>Search</div>", unsafe_allow_html=True)
-        search = st.text_input("Search headlines…", placeholder="Search headlines…", label_visibility="collapsed")
+        st.text_input("Search headlines…", placeholder="Search headlines…", key="sb_search",
+                      label_visibility="collapsed", on_change=_on_sb_search)
 
-    return selected_sources, category, search, auto_refresh
+
+# ── Mobile filter expander ────────────────────────────────────────────────────
+
+def render_mobile_expander(status: dict):
+    sel_count = len(st.session_state.sources_selected)
+    active = []
+    if sel_count < len(SOURCES):
+        active.append(f"{sel_count}/{len(SOURCES)} sources")
+    if st.session_state.filter_category != "All Topics":
+        active.append(st.session_state.filter_category)
+    if st.session_state.filter_search:
+        active.append(f'"{st.session_state.filter_search}"')
+    label = "🔍 Filter & Search" + (f"  ·  {', '.join(active)}" if active else "")
+
+    with st.expander(label, expanded=False):
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("<div class='sidebar-section-header' style='margin-top:4px'>Sources</div>",
+                        unsafe_allow_html=True)
+            _render_source_controls("exp", status)
+        with col2:
+            st.markdown("<div class='sidebar-section-header' style='margin-top:4px'>Category</div>",
+                        unsafe_allow_html=True)
+            st.selectbox("Category", CATEGORIES, key="exp_cat",
+                         label_visibility="collapsed", on_change=_on_exp_cat)
+            st.markdown("<div class='sidebar-section-header'>Search</div>", unsafe_allow_html=True)
+            st.text_input("Search headlines…", placeholder="Search headlines…", key="exp_search",
+                          label_visibility="collapsed", on_change=_on_exp_search)
 
 
 # ── Card renderer ─────────────────────────────────────────────────────────────
 
 def card_html(article: dict) -> str:
-    colour      = article["colour"]
-    txt_colour  = article["text_colour"]
-    source      = article["source"]
-    title       = article["title"].replace('"', "&quot;").replace("<", "&lt;")
-    url         = article["url"]
-    desc        = article["description"].replace("<", "&lt;").replace(">", "&gt;")
-    favicon     = article["favicon_url"]
-    ago         = time_ago(article["published_datetime"])
-
+    colour     = article["colour"]
+    txt_colour = article["text_colour"]
+    source     = article["source"]
+    title      = article["title"].replace('"', "&quot;").replace("<", "&lt;")
+    url        = article["url"]
+    desc       = article["description"].replace("<", "&lt;").replace(">", "&gt;")
+    favicon    = article["favicon_url"]
+    ago        = time_ago(article["published_datetime"])
     return f"""
 <div class="news-card" style="border-left-color:{colour};">
   <div class="card-header">
@@ -575,19 +631,15 @@ def card_html(article: dict) -> str:
 
 def main():
     inject_css()
+    _init_state()
 
-    # Auto-refresh trigger
-    if AUTOREFRESH_AVAILABLE:
-        if st.session_state.get("auto_refresh_enabled", True):
-            st_autorefresh(interval=300_000, key="autorefresh_counter")
+    if AUTOREFRESH_AVAILABLE and st.session_state.get("auto_refresh_toggle", True):
+        st_autorefresh(interval=300_000, key="autorefresh_counter")
 
-    # Fetch data
     with st.spinner("Fetching headlines…"):
         articles, status = fetch_all_feeds()
 
-    # Sidebar (needs status for dots)
-    selected_sources, category, search, auto_refresh = render_sidebar(status)
-    st.session_state["auto_refresh_enabled"] = auto_refresh
+    render_sidebar(status)
 
     # ── Header ──
     last_refreshed = datetime.now().strftime("%H:%M:%S")
@@ -606,30 +658,30 @@ def main():
 </div>
 """, unsafe_allow_html=True)
 
-    st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
 
-    # ── Filter articles ──
-    filtered = articles
+    # ── Mobile filter expander ──
+    render_mobile_expander(status)
 
-    if selected_sources:
-        filtered = [a for a in filtered if a["source"] in selected_sources]
+    # ── Read canonical filter state ──
+    selected_sources = st.session_state.sources_selected
+    category         = st.session_state.filter_category
+    search           = st.session_state.filter_search
 
+    # ── Filter ──
+    filtered = [a for a in articles if a["source"] in selected_sources]
     if category != "All Topics":
         filtered = [a for a in filtered if infer_category(a["title"], a["description"]) == category]
-
     if search:
         q = search.lower()
-        filtered = [
-            a for a in filtered
-            if q in a["title"].lower() or q in a["description"].lower()
-        ]
+        filtered = [a for a in filtered if q in a["title"].lower() or q in a["description"].lower()]
 
     live_sources = sum(1 for v in status.values() if v)
     total = len(filtered)
 
     # ── Stats bar ──
     filter_tag = (
-        f"<span class='stats-sep'>·</span><span style='color:#999'>filtered by: {category}</span>"
+        f"<span class='stats-sep'>·</span><span style='color:#999'>filtered: {category}</span>"
         if category != "All Topics" else ""
     )
     search_tag = (
@@ -657,12 +709,7 @@ def main():
 """, unsafe_allow_html=True)
         return
 
-    COLS = 3
-    grid_cards = []
-    for i in range(0, len(filtered), COLS):
-        chunk = filtered[i:i + COLS]
-        grid_cards.extend(card_html(a) for a in chunk)
-
+    grid_cards = [card_html(a) for a in filtered]
     st.markdown(f'<div class="card-grid">{"".join(grid_cards)}</div>', unsafe_allow_html=True)
 
 
